@@ -1,6 +1,6 @@
-import { CreateApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseApi = CreateApi({
+const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com",
@@ -9,9 +9,17 @@ const baseApi = CreateApi({
     getPosts: builder.query({
       query: () => "/posts",
     }),
+
+    getUsers: builder.query({
+      query: () => "/users",
+    }),
+
+    getPostsByID: builder.query({
+      query: (id) => `/posts/${id}`,
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = baseApi;
+export const { useGetPostsQuery, useGetPostsByIDQuery } = baseApi;
 
 export default baseApi;
